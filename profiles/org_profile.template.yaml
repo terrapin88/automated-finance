@@ -1,86 +1,125 @@
 org:
   name: "Example Investment Manager"
     timezone: "America/Chicago"
-      operating_model: "RIA" # RIA | PE | HF | VC | FamilyOffice | Other
-        asset_focus: ["public_equities"] # e.g., crypto, public_equities, private_equity, venture, credit
+      operating_model: "RIA"  # RIA | PE | HF | VC | FamilyOffice | Other
+        asset_focus: ["public_equities"]  # e.g., crypto, public_equities, private_equity, venture, credit
           aum_usd: null
 
-          entities:
-            total_count: null
-              types:
-                  us_partnerships: null
-                      us_blocker_c_corps: null
-                          offshore_feeders: null
-                              spvs: null
-                                  gps: null
-                                      management_companies: null
-                                        list: []
-                                          # Optional detailed list entries:
-                                            # - name: "Fund I, L.P."
-                                              #   type: "us_partnership"
-                                                #   jurisdiction: "DE"
-                                                  #   functional_currency: "USD"
-                                                    #   notes: "Master-feeder structure"
+          # ============ ENTITIES & FUND STRUCTURE ============
+          entities_total_count: null
+          entities_us_partnerships: null
+          entities_us_blocker_c_corps: null
+          entities_offshore_feeders: null
+          entities_spvs: null
+          entities_gps: null
+          entities_management_companies: null
+          entities_list: []
+            # Optional detailed entries:
+              # - name: "Fund I, L.P."
+                #   type: "us_partnership"
+                  #   jurisdiction: "DE"
+                    #   functional_currency: "USD"
+                      #   notes: "Master-feeder structure"
 
-                                                    service_providers:
-                                                      auditor: null
-                                                        tax_firm: null
-                                                          fund_admin: null
-                                                            prime_broker: null
-                                                              legal: null
-                                                                valuation_firm: null
+                      # ============ SERVICE PROVIDERS ============
+                      service_providers_auditor: null
+                      service_providers_tax_firm: null
+                      service_providers_fund_admin: null
+                      service_providers_prime_broker: null
+                      service_providers_legal: null
+                      service_providers_valuation_firm: null
 
-                                                                custody_and_banking:
-                                                                  banks: []
-                                                                    custodians: []
-                                                                      exchanges: []
-                                                                        wallets:
-                                                                            hot_wallet_policy: "none"
-                                                                              # none | limited | permitted
-                                                                                  cold_storage: []
-                                                                                    dual_control_required: true
+                      # ============ CUSTODY & BANKING ============
+                      custody_banks: []
+                      custody_custodians: []
+                      custody_exchanges: []
+                      custody_hot_wallet_policy: "none"  # none | limited | permitted
+                      custody_cold_storage: []
+                      custody_dual_control_required: true
 
-                                                                                    systems:
-                                                                                      general_ledger: null          # NetSuite | QBO | Intacct | Other
-                                                                                        portfolio_accounting: null    # Admin platform or internal
-                                                                                          reporting: []                 # Allvue, Dynamo, Carta, internal dashboards, etc.
-                                                                                            expense_tools: []             # Ramp, Brex, Bill.com, Expensify, etc.
-                                                                                              data_warehouse: null          # Snowflake/BigQuery/Postgres/etc.
-                                                                                                document_storage: null        # GDrive/SharePoint/Dropbox/etc.
+                      # ============ SYSTEMS & PLATFORMS ============
+                      systems_general_ledger: null  # NetSuite | QBO | Intacct | Other
+                      systems_portfolio_accounting: null  # Admin platform or internal
+                      systems_reporting: []  # Allvue, Dynamo, Carta, internal dashboards, etc.
+                      systems_expense_tools: []  # Ramp, Brex, Bill.com, Expensify, etc.
+                      systems_data_warehouse: null  # Snowflake | BigQuery | Postgres | Other
+                      systems_document_storage: null  # GDrive | SharePoint | Dropbox | Other
 
-                                                                                                close_and_reporting:
-                                                                                                  close_cadence: "monthly"      # monthly | quarterly | other
-                                                                                                    close_deadline_days: null     # e.g., 10 means "close by day 10"
-                                                                                                      nav_estimated: true
-                                                                                                        lp_reporting_cadence: "quarterly"
-                                                                                                          board_reporting_cadence: "quarterly"
-                                                                                                          
-                                                                                                          valuation_policy:
-                                                                                                            pricing_sources:
-                                                                                                                public: []
-                                                                                                                    crypto: []
-                                                                                                                        private: []
-                                                                                                                          hierarchy:
-                                                                                                                              level_1_allowed: true
-                                                                                                                                  level_2_allowed: true
-                                                                                                                                      level_3_allowed: true
-                                                                                                                                        pm_mark_process: "pm_proposes_finance_validates"
-                                                                                                                                          materiality_thresholds:
-                                                                                                                                              nav_bps: null               # e.g., 25
-                                                                                                                                                  usd: null                   # e.g., 100000
-                                                                                                                                                  
-                                                                                                                                                  risk_and_controls:
-                                                                                                                                                    approval_matrix:
-                                                                                                                                                        wire_threshold_usd: null
-                                                                                                                                                            new_beneficiary_requires_call_back: true
-                                                                                                                                                                exchange_whitelist_required: true
-                                                                                                                                                                    related_party_payments_require_cfo: true
-                                                                                                                                                                      incident_response_owner: "TREASURY-CUSTODY"
-                                                                                                                                                                        record_retention_years: 7
-                                                                                                                                                                        
-                                                                                                                                                                        team:
-                                                                                                                                                                          finance_headcount: null
-                                                                                                                                                                            roles: []
-                                                                                                                                                                              # Optional role entries:
-                                                                                                                                                                                # - title: "Controller"
-                                                                                                                                                                                  #   primary_owner: ["fund_accounting", "close", "audit_suppor
+                      # ============ CLOSE & REPORTING ============
+                      close_cadence: "monthly"  # monthly | quarterly | other
+                      close_deadline_days: null  # e.g., 10 means "close by day 10"
+                      close_nav_estimated: true
+                      lp_reporting_cadence: "quarterly"
+                      board_reporting_cadence: "quarterly"
+
+                      # ============ VALUATION POLICY ============
+                      valuation_pricing_sources_public: []
+                      valuation_pricing_sources_crypto: []
+                      valuation_pricing_sources_private: []
+                      valuation_hierarchy_level_1_allowed: true
+                      valuation_hierarchy_level_2_allowed: true
+                      valuation_hierarchy_level_3_allowed: true
+                      valuation_pm_mark_process: "pm_proposes_finance_validates"
+
+                      # ============ MATERIALITY & THRESHOLDS ============
+                      materiality_nav_bps: null  # e.g., 25
+                      materiality_usd: null  # e.g., 100000
+
+                      # ============ RISK & CONTROLS ============
+                      controls_wire_threshold_usd: null
+                      controls_new_beneficiary_requires_call_back: true
+                      controls_exchange_whitelist_required: true
+                      controls_related_party_payments_require_cfo: true
+                      controls_incident_response_owner: "TREASURY-CUSTODY"
+                      controls_record_retention_years: 7
+
+                      # ============ TAX CONFIGURATION ============
+                      tax_fiscal_year_end: null  # e.g., "12-31"
+                      tax_withholding_policy: "default"  # default | AGR | custom
+                      tax_nra_documentation_required: false
+                      tax_reporting_1099_required: false
+                      tax_reporting_form_pf_required: false
+
+                      # ============ COMPLIANCE & REGULATIONS ============
+                      compliance_aml_policy_threshold: null  # transaction/position size triggering review
+                      compliance_sanctions_screening_vendors: []  # e.g., ["Lexis Nexis", "Accuity"]
+                      compliance_kyc_requirements: "standard"  # standard | enhanced | minimal
+                      compliance_control_framework: "COSO"  # COSO | ISO_27001 | custom
+                      compliance_retention_policy: "FINRA"  # FINRA | SEC | custom
+                      compliance_aum_threshold_pf: null  # e.g., 150000000
+
+                      # ============ PAYMENT RAILS ============
+                      payment_ach_enabled: true
+                      payment_wire_enabled: true
+                      payment_approved_banks: []
+                      payment_check_enabled: false
+
+                      # ============ DATA GOVERNANCE ============
+                      data_retention_days: 2555  # e.g., 7 years = 2555 days
+                      data_reconciliation_tolerance_bps: 10  # basis points tolerance for variance
+                      data_sources: []
+                        # - name: "Custodian"
+                          #   connection_type: "API"
+                            #   schedule: "daily"
+                              # - name: "PM System"
+                                #   connection_type: "SFTP"
+                                  #   schedule: "daily"
+                                  data_warehouse_platform: null  # Snowflake | BigQuery | Postgres
+                                  data_warehouse_schemas: []  # e.g., ["staging", "core", "reporting"]
+
+                                  # ============ AUDIT & EXTERNAL REPORTING ============
+                                  audit_annual_audit_required: true
+                                  audit_external_auditor_name: null
+                                  audit_fiscal_year_end: null  # e.g., "12-31"
+                                  audit_materiality_threshold_bps: null
+                                  audit_key_accounts: []  # e.g., ["NAV", "fund_fees", "distributions"]
+
+                                  # ============ TEAM & ORGANIZATIONAL ============
+                                  team_finance_headcount: null
+                                  team_roles: []
+                                    # - title: "Controller"
+                                      #   primary_owner: ["fund_accounting", "close", "audit_support"]
+                                        #   secondary_owner: []
+                                          # - title: "Finance Analyst"
+                                            #   primary_owner: ["treasury", "reporting"]
+                                              #   secondary_owner: []
